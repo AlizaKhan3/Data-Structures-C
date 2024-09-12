@@ -5,7 +5,7 @@ struct Node{
     struct Node * next;
 };
 
-struct Node * top = 0;
+struct Node * top = 0;  //initial value of top is set to 0 refers to Empty Stack
 
 void pushElementInStack(int dataValue){ 
     struct Node * head;
@@ -30,6 +30,30 @@ void displayLIinkedListInStack(){
     }
 }
 
+void Peek(){   //pop operation is basically peek
+     if(top == 0){
+        std::cout<<"Stack is empty" << std::endl;
+    }
+    else{
+        std::cout<<"The peek value is "<< top->data<<std::endl;
+    }
+}
+
+//as topmost value from peek is out now we'll pop the free space
+void pop(){
+    struct Node * temp;
+    temp = top;
+    if(top == 0){
+        std::cout<<"STACK UNDERFLOW"<<std::endl;
+    }
+    else{
+        std::cout<<"The popped element is"<< top->data<<std::endl;
+        top = top->next;
+        free(temp);
+    }
+}
+
+
 int main(){
    pushElementInStack(2);
    pushElementInStack(3);
@@ -37,8 +61,13 @@ int main(){
    pushElementInStack(100);
    pushElementInStack(899);
    pushElementInStack(22);
+   
+   displayLIinkedListInStack(); 
+   
+   
+   pop();  //removes the element from stack and free space in stack 
 
-   displayLIinkedListInStack();
-    
+   Peek();   //prints the next top value of stack after pop function
+   
     return 0;
 }
