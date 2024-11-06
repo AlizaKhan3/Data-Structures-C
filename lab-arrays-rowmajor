@@ -1,0 +1,68 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int rows, cols;
+
+    // User se rows aur columns ka size lena
+    cout << "Enter number of rows: ";
+    cin >> rows;
+    cout << "Enter number of columns: ";
+    cin >> cols;
+
+    // Single-dimensional array ka dynamic allocation
+    int* arr = new int[rows * cols];
+
+    // Array mein values set karna
+    cout << "Enter array elements:" << endl;
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            int index = i * cols + j;  // Row-major order
+            cin >> arr[index];
+        }
+    }
+
+    // Array display karna in row-major order
+    cout << "\nArray in Row-Major Order:" << endl;
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            int index = i * cols + j;
+            cout << arr[index] << " ";
+        }  
+        cout << endl;  //new line se new row show krega array ki
+    }
+
+    // Array ka size change karna (new rows and columns)
+    cout << "\nEnter new number of rows: ";
+    cin >> rows;
+    cout << "Enter new number of columns: ";
+    cin >> cols;
+
+    // Naya size allocate karna aur purane elements copy karna
+    int* newArr = new int[rows * cols];
+
+    // Copy elements from old array to new array
+    for (int i = 0; i < rows && i * cols < rows * cols; i++) {
+        for (int j = 0; j < cols && i * cols + j < rows * cols; j++) {
+            newArr[i * cols + j] = (i * cols + j < rows * cols) ? arr[i * cols + j] : 0;
+        }
+    }
+
+    // Purane array ko delete karna aur naye ko assign karna
+    delete[] arr;
+    arr = newArr;
+
+    // Updated array ko display karna
+    cout << "\nUpdated Array:" << endl;
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            cout << arr[i * cols + j] << " ";
+        }
+        cout << endl;
+    }
+
+    // Memory free karna
+    delete[] arr;
+
+    return 0;
+}
