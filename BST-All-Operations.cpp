@@ -184,7 +184,8 @@ int main() {
     // struct node *root = createNodesOfBST(2);
     // struct node *root2 = createNodesOfBST(9);
     // struct node *root3 = createNodesOfBST(12);
-    
+
+    //Linking Nodes
     // root->left = root2;
     // root->right = root3;
     
