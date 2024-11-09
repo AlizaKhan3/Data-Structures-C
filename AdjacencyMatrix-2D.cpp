@@ -1,6 +1,7 @@
 #include <iostream>
 using namespace std;
-#include <>
+#include <vector>
+// void printGraph(int graph[i][j], int V) {
 void printGraph(const vector<vector<int>>& graph, int V){
     for (int i = 0; i < V; i++) {
         for (int j = 0; j < V; j++) {
@@ -11,7 +12,7 @@ void printGraph(const vector<vector<int>>& graph, int V){
 }
 
 int main() {
-    int V; // Number of vertices
+    int V;
     cout<<"Enter verticies";
     cin>>V;
     vector<vector<int>> graph(V, vector<int>(V));
