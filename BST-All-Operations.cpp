@@ -37,7 +37,7 @@ void inorderTraversal(struct node *root){
     }
 }
 
-void preOrder(struct node *root){
+void preOrder(struct node *root){            //PreOrder = Depth First Algorithm 
     if(root != NULL){
         cout<<root->data<<" ";
         preOrder(root->left);
@@ -53,46 +53,25 @@ void postOrder(struct node *root){
     }
 }
 
-// struct node* deleteNode(node* root, int key) {
-//     // Base case: If the tree is empty
-//     if (root == NULL) return root;
+void levelOrderTraversal(struct node* root) { //level order traversal = Breadth first Search
+    if (root!=NULL){
+        queue <node*> q;
+        q.push(root);
+        while(!q.empty()){
+            struct node *current;
+            current = q.front();
+            q.pop();
+            cout << current->data << " ";
 
-//     // Recursively find the node to be deleted
-//     if (key < root->data) {
-//         root->left = deleteNode(root->left, key);
-//     } else if (key > root->data) {
-//         root->right = deleteNode(root->right, key);
-//     } else {
-//         // Node with only one child or no child
-//         if (root->left == NULL) {
-//             node* temp = root->right;
-//             delete root;
-//             return temp;
-//         } else if (root->right == NULL) {
-//             node* temp = root->left;
-//             delete root;
-//             return temp;
-//         }
-
-//         // Node with two children: Get the inorder successor
-//         node* temp = minValueNode(root->right);
-
-//         // Copy the inorder successor's content to this node
-//         root->data = temp->data;
-//         // Delete the inorder successor
-//         root->right = deleteNode(root->right, temp->data);
-//     }
-//     return root;
-// }
-
-// node* minValueNode(node* node) {
-//     node* current = node;
-//     // Loop to find the leftmost leaf
-//     while (current && current->left != NULL)
-//         current = current->left;
-
-//     return current;
-// }
+            if(current->left != NULL){
+                q.push(current->left);
+            }
+            if(current->right != NULL){
+                q.push(current->right);
+            }
+        }
+    }
+}
 
 int findMin(struct node *root){
     if(root == NULL){
@@ -148,16 +127,11 @@ struct node *deleteNode(struct node *root, int data){
         }
          else {
             // Finding min value in right subtree of root node
-            // int minValue = findMin(root->right);
-            // // Replacin root data jo min value mili usse
-            // root->data = minValue;
-            // // Delete the node that had the minimum value
-            // root->right = deleteNode(root->right, minValue);
-              //min value find horahi right subtree mein
-          int minValue = findMin(root->right);
-          root->data = minValue;
-          
-          root->right = deleteNode(root->right, minValue);
+            int minValue = findMin(root->right);
+            // Replacin root data jo min value mili usse
+            root->data = minValue;
+            // Delete the node that had the minimum value
+            root->right = deleteNode(root->right, minValue);
         }
     }
     return root;
